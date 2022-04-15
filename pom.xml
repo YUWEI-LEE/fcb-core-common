@@ -12,6 +12,13 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>fcb-common</name>
 	<description>fcb-common</description>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>api</module>
+		<module>impl</module>
+	</modules>
+
 	<properties>
 		<java.version>11</java.version>
 	</properties>
