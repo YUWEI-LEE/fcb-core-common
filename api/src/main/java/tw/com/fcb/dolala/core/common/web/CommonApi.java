@@ -83,7 +83,7 @@ public interface CommonApi {
 	// TCTYR02 以匯款行/付款行國家代號查詢名稱
 	@GetMapping("/bank/countryname/{countrycode}")
 	@Operation(description = "傳入CountryCode查詢國家名稱", summary = "以CountryCode查詢國家名稱")
-	public String getCountryName(@PathVariable String countryCode);
+	public String getCountryName(@PathVariable("countrycode") String countryCode);
 
 	// TBNMR12 依劃帳行ID+幣別代碼 查詢劃帳行名稱地址
 	@GetMapping("/bank/countryadd/{swiftcode}/{currency}")

@@ -209,7 +209,7 @@ public class CommonController implements CommonApi {
 	}
 
 	// TCTYR02 以匯款行/付款行國家代號查詢名稱
-	public String getCountryName(@PathVariable String countryCode) {
+	public String getCountryName(@PathVariable("countrycode") String countryCode) {
 
 		log.info("呼叫讀取國家名稱API：查詢 "+countryCode);
 
