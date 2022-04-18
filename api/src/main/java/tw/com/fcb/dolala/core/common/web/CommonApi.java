@@ -2,6 +2,7 @@ package tw.com.fcb.dolala.core.common.web;
 
 import java.math.BigDecimal;
 
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,7 +20,7 @@ import tw.com.fcb.dolala.core.common.web.dto.CustomerDto;
  * 
  */
 @RestController
-@RequestMapping("/common")
+//@RequestMapping("/common")
 public interface CommonApi {
 
 	// 匯率處理
@@ -87,12 +88,12 @@ public interface CommonApi {
 	// TBNMR12 依劃帳行ID+幣別代碼 查詢劃帳行名稱地址
 	@GetMapping("/bank/countryadd/{swiftcode}/{currency}")
 	@Operation(description = "傳入劃帳行ID+幣別代碼查詢劃帳行名稱地址", summary = "以劃帳行ID+幣別代碼查詢劃帳行名稱地址")
-	public BankAddressDto getBankAdd(String swiftCode, String currency);
+	public BankAddressDto getBankAdd(@PathVariable String swiftCode, @PathVariable String currency);
 
 	// TBNMR13 依劃帳行ID 查詢劃帳行名稱地址 (幣別代碼=99)
 	@GetMapping("/bank/countryadd/{swiftcode}/99")
 	@Operation(description = "傳入劃帳行ID+99查詢劃帳行名稱地址", summary = "以劃帳行ID+99查詢劃帳行名稱地址")
-	public Response<BankAddressDto> getBankAdd(String swiftCode);
+	public Response<BankAddressDto> getBankAdd(@PathVariable String swiftCode);
 
 	// 查詢error code
 	@GetMapping("/errorcode/{errorcode}")
@@ -102,11 +103,14 @@ public interface CommonApi {
 	// 手續費計算
 	@GetMapping("/GetChargeFeeTWD")
 	@Operation(description = "依currency, amount取得chargeFee(新台幣)", summary = "手續費計算")
-	public BigDecimal isGetChargeFeeTWD(String currency, BigDecimal amount);
+	public BigDecimal isGetChargeFeeTWD(@PathVariable String currency, @PathVariable BigDecimal amount);
 
 	// 讀取匯款性質名稱
 	@GetMapping("/GetRemitNature")
 	@Operation(description = "依remitNatureCode, remitNatureType取得remitNatureName", summary = "讀取匯款性質名稱")
-	public String isGetRemitNature(String remitNatureCode, String remitNatureType);
+	public String isGetRemitNature(@PathVariable String remitNatureCode, @PathVariable String remitNatureType);
 
 }
+
+
+

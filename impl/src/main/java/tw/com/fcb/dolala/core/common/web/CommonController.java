@@ -28,6 +28,7 @@ import tw.com.fcb.dolala.core.config.IRConfig;
  */
 @Slf4j
 @RestController
+@RequestMapping("/common")
 public class CommonController implements CommonApi {
 
 	@Autowired
