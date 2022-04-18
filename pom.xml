@@ -13,15 +13,16 @@
 	<name>fcb-common</name>
 	<description>fcb-common</description>
 	<packaging>pom</packaging>
-
+	<properties>
+		<java.version>11</java.version>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+	</properties>
 	<modules>
 		<module>api</module>
 		<module>impl</module>
 	</modules>
 
-	<properties>
-		<java.version>11</java.version>
-	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -87,36 +88,14 @@
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.4.2.Final</version>
+		</dependency>
 	</dependencies>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
 
-
-				<dependencies>
-					<dependency>
-						<groupId>org.springframework</groupId>
-						<artifactId>springloaded</artifactId>
-						<version>1.2.8.RELEASE</version>
-					</dependency>
-				</dependencies>
-
-				<configuration>
-					<profiles>
-						<profile>dev</profile>
-						<profile>sit</profile>
-						<profile>uat</profile>
-						<profile>prod</profile>
-						<profile>dr</profile>
-					</profiles>
-				</configuration>
-			</plugin>
-
-
-		</plugins>
 	</build>
-
 </project>

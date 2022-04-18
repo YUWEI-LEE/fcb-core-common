@@ -19,7 +19,7 @@ import tw.com.fcb.dolala.core.common.service.ExchgRateService;
 import tw.com.fcb.dolala.core.common.service.IDNumberCheckService;
 import tw.com.fcb.dolala.core.common.web.dto.CustomerDto;
 import tw.com.fcb.dolala.core.common.web.dto.CustomerAccountDto;
-import tw.com.fcb.dolala.core.common.web.vo.BankVo;
+import tw.com.fcb.dolala.core.common.service.vo.BankVo;
 import tw.com.fcb.dolala.core.config.IRConfig;
 
 /**
