@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import tw.com.fcb.dolala.core.common.repository.CustomerRepository;
 import tw.com.fcb.dolala.core.common.repository.entity.CustomerEntity;
+import tw.com.fcb.dolala.core.common.service.mapper.CustomerMapper;
 import tw.com.fcb.dolala.core.common.web.dto.CustomerDto;
 
 @Transactional
@@ -14,18 +15,21 @@ import tw.com.fcb.dolala.core.common.web.dto.CustomerDto;
 public class CustomerService {
 	@Autowired
 	CustomerRepository repository;
-	
+	@Autowired
+	CustomerMapper customerMapper;
 	public CustomerDto getCustomer(String customerSeqNo)  throws Exception{
-		CustomerDto customer = new CustomerDto();
+//		CustomerDto customer = new CustomerDto();
 		CustomerEntity customerEntity = repository.findByCustomerSeqNo(customerSeqNo).orElseThrow(() -> new Exception("D001"));
-		BeanUtils.copyProperties(customerEntity, customer);
-		return customer;
+		CustomerDto customerDto = customerMapper.customerToDto(customerEntity);
+//		BeanUtils.copyProperties(customerEntity, customer);
+		return customerDto;
 	}
 
 	public CustomerDto getCustomerId(String customerId)  throws Exception{
-		CustomerDto customer = new CustomerDto();
+//		CustomerDto customer = new CustomerDto();
 		CustomerEntity customerEntity = repository.findByCustomerId(customerId).orElseThrow(() -> new Exception("D001"));
-		BeanUtils.copyProperties(customerEntity, customer);
-		return customer;
+//		BeanUtils.copyProperties(customerEntity, customer);
+		CustomerDto customerDto = customerMapper.customerToDto(customerEntity);
+		return customerDto;
 	}
 }
