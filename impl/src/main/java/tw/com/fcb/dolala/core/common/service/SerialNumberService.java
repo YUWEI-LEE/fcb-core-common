@@ -45,7 +45,6 @@ public class SerialNumberService {
         serialNumber = serialNumberRepository.findBySystemTypeAndBranch(systemType,branch).orElseThrow(() -> new Exception("D001"+ "SerialNumberRepository" + systemType +"," + branch));
         Long serialNo = getNo(serialNumber.getSerialNo());
         String seqNo = StringUtils.leftPad(String.valueOf(serialNo),6,"0");
-//        String seqNo = combinationIrSeq(serialNo);
         return seqNo;
     }
 //取得外匯編號FxNo
@@ -64,38 +63,21 @@ public class SerialNumberService {
         Long serialNo = getNo(serialNumber.getSerialNo());
         // noCode + 西元年最末碼+ 字軋+ 流水號六碼
         log.info("no-code = {}",noCode);
-        String tempNo = noCode + nowDate.substring(3,4)+ branch;
-
         String fxNo = combinationFxNo(noCode , nowDate.substring(3,4),branchCode,serialNo);
-
-
         log.info("{取得外匯編號 }"+ fxNo);
-
         return fxNo;
     }
     private String combinationFxNo(String noCode, String year, String branchCode, Long serialNo) {
         String fxNo;
         String tempNo = String.valueOf(serialNo);
         fxNo = noCode + year + branchCode;
-        int length = 10 - fxNo.length();
+        int length = 11 - fxNo.length();
 
         for (int j = 1; j < length; j++ ) {
             tempNo = "0"+ tempNo;
         }
         fxNo = fxNo + tempNo;
         return fxNo;
-    }
-    private String combinationIrSeq(Long serialNo) {
-        String irSeq;
-        String tempNo = String.valueOf(serialNo);
-
-        int length = 6 - tempNo.length();
-
-        for (int j = 1; j <= length; j++ ) {
-            tempNo = "0"+ tempNo;
-        }
-        irSeq =  tempNo;
-        return irSeq;
     }
  // 讀取取號檔資料
     public  SerialNumber getNumberSerial(String systemType,String branch){
