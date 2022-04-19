@@ -2,12 +2,9 @@ package tw.com.fcb.dolala.core.common.web;
 
 import java.math.BigDecimal;
 
-import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
 import tw.com.fcb.dolala.core.common.http.Response;
@@ -19,7 +16,7 @@ import tw.com.fcb.dolala.core.common.web.dto.CustomerDto;
  * @author sinjen
  * 
  */
-@RestController
+//@RestController
 //@RequestMapping("/common")
 public interface CommonApi {
 
