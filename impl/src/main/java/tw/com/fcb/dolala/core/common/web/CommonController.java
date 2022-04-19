@@ -74,14 +74,14 @@ public class CommonController implements CommonApi {
 	}
 
 	// 國家資料處理
-	public String isGetCountryNumber(String countryCode) {
+	public String isGetCountryNumber(@PathVariable("countryCode") String countryCode) {
 		String countryNumber = null;
 		countryNumber = countryService.getCountryNumber(countryCode);
 		log.info("呼叫國別處理API：以國家代號2碼:" + countryCode + " 讀取國家代號4碼:" + countryNumber);
 		return countryNumber;
 	}
 
-	public String isGetCountryCode(String countryNumber) {
+	public String isGetCountryCode(@PathVariable("countryNumber") String countryNumber) {
 		String countryCode = null;
 		countryCode = countryService.getCountryCode(countryNumber);
 		log.info("呼叫國別處理API：以國家代號4碼:" + countryNumber + " 讀取國家代號2碼:" + countryCode);
@@ -89,7 +89,7 @@ public class CommonController implements CommonApi {
 	}
 
 	// 身分證號檢核
-	public boolean isCheckId(String id) {
+	public boolean isCheckId(@PathVariable("id") String id) {
 		boolean check = false;
 		check = idNumberCheckService.isValidIDorRCNumber(id);
 		log.info("呼叫身分證號檢核API：檢核" + id + "是否符合編碼規則:" + check);
@@ -97,14 +97,14 @@ public class CommonController implements CommonApi {
 	}
 	
 	// 讀取取號檔
-	public Long isGetNumberSerial(@PathVariable String systemType, @PathVariable String branch){
+	public Long isGetNumberSerial(@PathVariable("systemType") String systemType, @PathVariable("branch") String branch){
 		SerialNumber serialNumber = serialNumberService.getNumberSerial(systemType,branch);
 		log.info("呼叫讀取取號檔API：查詢"+ systemType + "現已使用到第"+ serialNumber.getSerialNo()+ "號");
 		return serialNumber.getSerialNo();
 	}
 
 	// 取得外匯編號 FXNO
-	public String getFxNo(@PathVariable String noCode, @PathVariable String systemType, @PathVariable String branch)  {
+	public String getFxNo(@PathVariable("noCode") String noCode, @PathVariable("systemType") String systemType, @PathVariable("branch") String branch)  {
 		String fxNo = null;
 		try {
 			 fxNo =  serialNumberService.getFxNo(systemType,branch);
@@ -145,7 +145,7 @@ public class CommonController implements CommonApi {
 
 
 	//顧客資料處理
-	public Response<CustomerDto> getCustomer(@PathVariable String accountNumber) {
+	public Response<CustomerDto> getCustomer(@PathVariable("accountNumber") String accountNumber) {
 		log.info("接收accountNumber = " + accountNumber);
 		CustomerDto customerDto= null;
 		Response<CustomerDto> response = new Response<CustomerDto>();
@@ -165,7 +165,7 @@ public class CommonController implements CommonApi {
 
 	}
 	
-	public Response<CustomerDto> getCustomerId(@PathVariable String customerId) {
+	public Response<CustomerDto> getCustomerId(@PathVariable("customerId") String customerId) {
 		log.info("接收accountId = " + customerId);
 		CustomerDto customerDto= null;
 		Response<CustomerDto> response = new Response<CustomerDto>();
@@ -183,7 +183,7 @@ public class CommonController implements CommonApi {
 	}
 	
 	// 分行資料處理
-	public String getBranchCode(@PathVariable String branch){
+	public String getBranchCode(@PathVariable("branch") String branch){
 		String branchCode = null;
 		try {
 			branchCode = branchCheckService.getBranchCode(branch);
@@ -195,7 +195,7 @@ public class CommonController implements CommonApi {
 	}
 
 	// 讀銀行檔
-	public BankDto getBank(@PathVariable String swiftCode) {
+	public BankDto getBank(@PathVariable("swiftCode") String swiftCode) {
 		BankDto bankDto = new BankDto();
 		BankVo bankVo = new BankVo();
 		try {
@@ -217,7 +217,7 @@ public class CommonController implements CommonApi {
 	}
 
 	// TBNMR12 依劃帳行ID+幣別代碼 查詢劃帳行名稱地址
-	public BankAddressDto getBankAdd(String swiftCode,String currency) {
+	public BankAddressDto getBankAdd(@PathVariable("swiftcode") String swiftCode, @PathVariable("currency") String currency) {
 		BankAddressDto bankAddressDto = new BankAddressDto();
 
 		log.info("呼叫劃帳行名稱地址API：查詢 "+swiftCode+"+"+currency);
@@ -228,7 +228,7 @@ public class CommonController implements CommonApi {
 	}
 
 	// TBNMR13 依劃帳行ID 查詢劃帳行名稱地址 (幣別代碼=99)
-	public Response<BankAddressDto> getBankAdd(String swiftCode) {
+	public Response<BankAddressDto> getBankAdd(@PathVariable("swiftcode") String swiftCode) {
 		BankAddressDto bankAddressDto = new BankAddressDto();
 		BankVo bankVo = new BankVo();
 		Response<BankAddressDto> response = new Response<BankAddressDto>();
