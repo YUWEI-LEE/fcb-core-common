@@ -16,6 +16,7 @@ import tw.com.fcb.dolala.core.common.web.dto.CustomerDto;
 @Mapper
 public interface CustomerMapper {
 
-    CustomerDto customerToDto( CustomerEntity  customerEntity);
+    CustomerDto customerToDto(CustomerEntity customerEntity);
+
     CustomerAccountDto customerAccountToDto(CustomerAccountEntity customerAccountEntity);
 }

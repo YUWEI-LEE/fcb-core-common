@@ -8,8 +8,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 public class FcbCoreCommonApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(FcbCoreCommonApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(FcbCoreCommonApplication.class, args);
+    }
 
 }

@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import tw.com.fcb.dolala.core.common.repository.entity.CustomerEntity;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<CustomerEntity,Long>{
+public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> {
 
-	Optional<CustomerEntity> findByCustomerSeqNo(String customerSeqNo);
+    Optional<CustomerEntity> findByCustomerSeqNo(String customerSeqNo);
 
-	Optional<CustomerEntity> findByCustomerId(String customerId);
+    Optional<CustomerEntity> findByCustomerId(String customerId);
 
 }

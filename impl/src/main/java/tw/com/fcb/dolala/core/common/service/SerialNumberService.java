@@ -38,67 +38,71 @@ public class SerialNumberService {
     SerialNumberRepository serialNumberRepository;
 
 
-//取得irCase seqNO
-    public String getIrSeqNo(String systemType,String branch) throws Exception {
+    //取得irCase seqNO
+    public String getIrSeqNo(String systemType, String branch) throws Exception {
 
         SerialNumber serialNumber;
-        serialNumber = serialNumberRepository.findBySystemTypeAndBranch(systemType,branch).orElseThrow(() -> new Exception("D001"+ "SerialNumberRepository" + systemType +"," + branch));
+        serialNumber = serialNumberRepository.findBySystemTypeAndBranch(systemType, branch).orElseThrow(() -> new Exception("D001" + "SerialNumberRepository" + systemType + "," + branch));
         Long serialNo = getNo(serialNumber.getSerialNo());
-        String seqNo = StringUtils.leftPad(String.valueOf(serialNo),6,"0");
+        String seqNo = StringUtils.leftPad(String.valueOf(serialNo), 6, "0");
         return seqNo;
     }
-//取得外匯編號FxNo
-    public String getFxNo(String systemType,String branch) throws Exception {
+
+    //取得外匯編號FxNo
+    public String getFxNo(String systemType, String branch) throws Exception {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String nowDate = sdf.format(new Date());
         //取得字軌
-        BranchInformation branchInformation = branchInformationRepository.findByBranch(branch).orElseThrow(() -> new Exception("D001"+ "branchInformationRepository"+ branch));
+        BranchInformation branchInformation = branchInformationRepository.findByBranch(branch).orElseThrow(() -> new Exception("D001" + "branchInformationRepository" + branch));
         String branchCode = branchInformation.getBranchCode();
 
         //讀取取號檔
         SerialNumber serialNumber;
-        serialNumber = serialNumberRepository.findBySystemTypeAndBranch(systemType,branch).orElseThrow(() -> new Exception("D001"+ "SerialNumberRepository"+ systemType + branch));
-        log.info("讀取取號檔號碼 = " +serialNumber.getSerialNo());
+        serialNumber = serialNumberRepository.findBySystemTypeAndBranch(systemType, branch).orElseThrow(() -> new Exception("D001" + "SerialNumberRepository" + systemType + branch));
+        log.info("讀取取號檔號碼 = " + serialNumber.getSerialNo());
         //取得流水號
         Long serialNo = getNo(serialNumber.getSerialNo());
         // noCode + 西元年最末碼+ 字軋+ 流水號六碼
-        log.info("no-code = {}",noCode);
-        String fxNo = combinationFxNo(noCode , nowDate.substring(3,4),branchCode,serialNo);
-        log.info("{取得外匯編號 }"+ fxNo);
+        log.info("no-code = {}", noCode);
+        String fxNo = combinationFxNo(noCode, nowDate.substring(3, 4), branchCode, serialNo);
+        log.info("{取得外匯編號 }" + fxNo);
         return fxNo;
     }
+
     private String combinationFxNo(String noCode, String year, String branchCode, Long serialNo) {
         String fxNo;
         String tempNo = String.valueOf(serialNo);
         fxNo = noCode + year + branchCode;
-        int length = 11 - fxNo.length();
+        int length = 10 - fxNo.length();
 
-        for (int j = 1; j < length; j++ ) {
-            tempNo = "0"+ tempNo;
+        for (int j = 1; j < length; j++) {
+            tempNo = "0" + tempNo;
         }
         fxNo = fxNo + tempNo;
         return fxNo;
     }
- // 讀取取號檔資料
-    public  SerialNumber getNumberSerial(String systemType,String branch){
+
+    // 讀取取號檔資料
+    public SerialNumber getNumberSerial(String systemType, String branch) {
         SerialNumber serialNumber;
-        serialNumber = serialNumberRepository.findBySystemTypeAndBranch(systemType,branch).orElseThrow();
+        serialNumber = serialNumberRepository.findBySystemTypeAndBranch(systemType, branch).orElseThrow();
         return serialNumber;
     }
+
     //更新取號檔
-    public void updateSerialNumber(String systemType,String branch,Long serialNo){
-        SerialNumber serialNumber = this.getNumberSerial(systemType,branch);
+    public void updateSerialNumber(String systemType, String branch, Long serialNo) {
+        SerialNumber serialNumber = this.getNumberSerial(systemType, branch);
 
         serialNumber.setSerialNo(serialNo);
         //更新取號檔
         serialNumberRepository.save(serialNumber);
     }
 
-// 取號 + 1
+    // 取號 + 1
     private static Long getNo(Long s) {
         Long serialNo;
         int i = 1;
-        serialNo =  (s + i);
+        serialNo = s + i;
         return serialNo;
     }
 

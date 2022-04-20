@@ -23,23 +23,23 @@ public class ErrorMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ERROR_MESSAGE_SEQ_NO")
-    String errorMessageSeqNo;	//流水編號
-    
+    String errorMessageSeqNo;    //流水編號
+
     @Column(name = "ERROR_CODE")
-    String errorCode;	//錯誤代碼
-    
+    String errorCode;    //錯誤代碼
+
     @Column(name = "ERROR_REASON")
-    String errorReason;	//錯誤說明
-    
-	@Column(name = "CREATE_DATE")
-	LocalDate createDate;	//資料建立日期
-	
-	@Column(name = "AMEND_DATE")
-	LocalDate amendDate;	//資料異動日期
-	
-	@Column(name = "FCB_AGENT_ID")
-    String fcbAgentID;	//經辦代碼
-    
+    String errorReason;    //錯誤說明
+
+    @Column(name = "CREATE_DATE")
+    LocalDate createDate;    //資料建立日期
+
+    @Column(name = "AMEND_DATE")
+    LocalDate amendDate;    //資料異動日期
+
+    @Column(name = "FCB_AGENT_ID")
+    String fcbAgentID;    //經辦代碼
+
     @Column(name = "STATUS")
-    String status;	//資料狀態
+    String status;    //資料狀態
 }

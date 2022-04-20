@@ -14,6 +14,6 @@ import tw.com.fcb.dolala.core.common.repository.entity.RemitNature;
 @Repository
 public interface RemitNatureRepository extends JpaRepository<RemitNature, Long> {
 
-	Optional<RemitNature> findByRemitNatureCodeAndRemitNatureType(String remitNatureCode, String remitNatureType);
-	
+    Optional<RemitNature> findByRemitNatureCodeAndRemitNatureType(String remitNatureCode, String remitNatureType);
+
 }

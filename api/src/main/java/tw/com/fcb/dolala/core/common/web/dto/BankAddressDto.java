@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class BankAddressDto {
 
-	@Schema(description = "名稱")
-	String name;
+    @Schema(description = "名稱")
+    String name;
 
-	@Schema(description = "地址")
-	String address;
+    @Schema(description = "地址")
+    String address;
 
 }

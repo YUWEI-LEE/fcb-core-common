@@ -1,7 +1,7 @@
 package tw.com.fcb.dolala.core.common.repository.entity;
 
 import lombok.Data;
-import tw.com.fcb.dolala.core.common.repository.enums.BranchType;
+import tw.com.fcb.dolala.core.common.enums.BranchType;
 
 import javax.persistence.*;
 
@@ -22,7 +22,7 @@ public class BranchInformation {
     String branchCode; // 分行字軌
 
     @Enumerated(EnumType.STRING)
-            @Column(name = "BRANCH_TYPE")
+    @Column(name = "BRANCH_TYPE")
     BranchType branchType; //分行種類 一類、二類、三類指定單位
 
     @Column(name = "ASSIGN_ZONE")

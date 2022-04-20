@@ -12,9 +12,6 @@ import tw.com.fcb.dolala.core.common.repository.entity.BranchInformation;
  * Author: Han-Ru
  * Date: 2022/3/15 下午 04:59
  * Description: 分行別檢核
- * Hisotry:
- * <author>     <time>       <version>     <desc>
- * 作者姓名       修改時間       版本編號       描述
  */
 @Transactional
 @Service
@@ -24,11 +21,11 @@ public class BranchCheckService {
 
     public void checkBranchExist(String branch) throws Exception {
         BranchInformation branchInformation =
-                  branchInformationRepository.findByBranch(branch).orElseThrow(() -> new Exception("找不到此分行別"+ branch));
+                branchInformationRepository.findByBranch(branch).orElseThrow(() -> new Exception("找不到此分行別" + branch));
     }
-    
+
     public String getBranchCode(String branch) throws Exception {
-        BranchInformation branchInformation = branchInformationRepository.findByBranch(branch).orElseThrow(() -> new Exception("找不到此分行別"+ branch));
+        BranchInformation branchInformation = branchInformationRepository.findByBranch(branch).orElseThrow(() -> new Exception("找不到此分行別" + branch));
         return branchInformation.getBranchCode();
     }
 }

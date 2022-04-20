@@ -14,17 +14,17 @@ public class ErrorMessageService {
     ErrorMessageRepository errorMessageRepository;
 
     public String findByErrorCode(String errorCode) {
-        if (errorCode == null){
+        if (errorCode == null) {
             errorCode = "    ";
         }
-        String errorMessage = null;
+        String errorMessage;
         if (errorCode.substring(0, 4).equals("DZZZ")) {
-            errorMessage = errorCode.substring(errorCode.indexOf(":")+1);
+            errorMessage = errorCode.substring(errorCode.indexOf(":") + 1);
         } else {
             errorMessage =
                     errorMessageRepository.findByErrorCode(errorCode.substring(0, 4)).orElse(new ErrorMessage()).getErrorReason();
         }
-        if (errorMessage == null){
+        if (errorMessage == null) {
             errorMessage = errorCode;
         }
         return errorMessage;

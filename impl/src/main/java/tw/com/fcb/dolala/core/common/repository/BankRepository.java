@@ -8,7 +8,7 @@ import tw.com.fcb.dolala.core.common.repository.entity.Bank;
 import java.util.Optional;
 
 @Repository
-public interface BankRepository extends JpaRepository<Bank,Long> {
+public interface BankRepository extends JpaRepository<Bank, Long> {
 
     Optional<Bank> findBySwiftCode(String swiftCode);
 

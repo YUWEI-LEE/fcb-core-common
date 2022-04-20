@@ -14,5 +14,5 @@ import tw.com.fcb.dolala.core.common.service.vo.BankVo;
 @Mapper
 public interface BankMapper {
 
-    BankVo toVo (Bank bank);
+    BankVo toVo(Bank bank);
 }

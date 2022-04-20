@@ -16,18 +16,17 @@ import tw.com.fcb.dolala.core.common.repository.entity.ExchgRate;
 @Transactional
 @Service
 public class ExchgRateService {
-	@Autowired
-	ExchgRateRepository repository;
-	
-	//依exchgRateType, currency, standardCurrency取得ExchgRate
-	public BigDecimal getRate(String exchgRateType, String currency, String standardCurrency) {
-		ExchgRate exchgRate = new ExchgRate();
-		exchgRate = repository.findByExchgRateTypeAndCurrencyAndStandardCurrency(exchgRateType, currency, standardCurrency);
-		if (exchgRate != null) {
-			return exchgRate.getExchangeRate();
-		} else
-		{
-			return null;
-		}
-	}
+    @Autowired
+    ExchgRateRepository repository;
+
+    //依exchgRateType, currency, standardCurrency取得ExchgRate
+    public BigDecimal getRate(String exchgRateType, String currency, String standardCurrency) {
+        ExchgRate exchgRate;
+        exchgRate = repository.findByExchgRateTypeAndCurrencyAndStandardCurrency(exchgRateType, currency, standardCurrency);
+        if (exchgRate != null) {
+            return exchgRate.getExchangeRate();
+        } else {
+            return null;
+        }
+    }
 }

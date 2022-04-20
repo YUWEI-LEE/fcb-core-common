@@ -8,10 +8,9 @@ import tw.com.fcb.dolala.core.common.repository.entity.ExchgRate;
 
 /**
  * @author sinjen
- * 
  */
 @Repository
 public interface ExchgRateRepository extends JpaRepository<ExchgRate, Long> {
 
-	ExchgRate findByExchgRateTypeAndCurrencyAndStandardCurrency(String exchgRateType, String currency, String standardCurrency);
+    ExchgRate findByExchgRateTypeAndCurrencyAndStandardCurrency(String exchgRateType, String currency, String standardCurrency);
 }

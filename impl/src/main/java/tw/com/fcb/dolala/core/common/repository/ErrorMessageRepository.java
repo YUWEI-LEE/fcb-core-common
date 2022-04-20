@@ -8,7 +8,7 @@ import tw.com.fcb.dolala.core.common.repository.entity.ErrorMessage;
 import java.util.Optional;
 
 @Repository
-public interface ErrorMessageRepository extends JpaRepository<ErrorMessage,Long> {
+public interface ErrorMessageRepository extends JpaRepository<ErrorMessage, Long> {
 
     Optional<ErrorMessage> findByErrorCode(String errorCode);
 
