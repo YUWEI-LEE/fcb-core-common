@@ -11,6 +11,7 @@ import tw.com.fcb.dolala.core.common.http.Response;
 import tw.com.fcb.dolala.core.common.web.dto.BankAddressDto;
 import tw.com.fcb.dolala.core.common.web.dto.BankDto;
 import tw.com.fcb.dolala.core.common.web.dto.CustomerDto;
+import tw.com.fcb.dolala.core.common.web.dto.FpmDto;
 
 /**
  * @author sinjen
@@ -104,6 +105,15 @@ public interface CommonApi {
     @Operation(description = "依remitNatureCode, remitNatureType取得remitNatureName", summary = "讀取匯款性質名稱")
     public String isGetRemitNature(@PathVariable String remitNatureCode, @PathVariable String remitNatureType);
 
+    // 讀取Fpm
+    @GetMapping("/fp/get-fpm/{account}/{crcy}")
+    @Operation(description = "依account, crcy取得Fpm", summary = "讀取Fpm")
+    public Response<FpmDto> getByFpmCurrency(@PathVariable("account") String account, @PathVariable("crcy") String crcy);
+
+    // 入帳
+    @GetMapping("/fp/update-balance/{account}/{crcy}/{amt}")
+    @Operation(description = "依account, crcy, amt外存入帳", summary = "外存入帳")
+    public Response<Integer> updateFpmBalance(@PathVariable("account") String account,@PathVariable("crcy") String crcy,@PathVariable("amt") BigDecimal amt);
 }
 
 

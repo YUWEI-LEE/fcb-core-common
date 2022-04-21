@@ -10,15 +10,13 @@ import lombok.extern.slf4j.Slf4j;
 import tw.com.fcb.dolala.core.common.http.Response;
 import tw.com.fcb.dolala.core.common.repository.entity.SerialNumber;
 import tw.com.fcb.dolala.core.common.service.*;
-import tw.com.fcb.dolala.core.common.web.dto.BankAddressDto;
-import tw.com.fcb.dolala.core.common.web.dto.BankDto;
+import tw.com.fcb.dolala.core.common.service.vo.FpmVo;
+import tw.com.fcb.dolala.core.common.web.dto.*;
 import tw.com.fcb.dolala.core.common.service.CountryService;
 import tw.com.fcb.dolala.core.common.service.CustomerAccountService;
 import tw.com.fcb.dolala.core.common.service.CustomerService;
 import tw.com.fcb.dolala.core.common.service.ExchgRateService;
 import tw.com.fcb.dolala.core.common.service.IDNumberCheckService;
-import tw.com.fcb.dolala.core.common.web.dto.CustomerDto;
-import tw.com.fcb.dolala.core.common.web.dto.CustomerAccountDto;
 import tw.com.fcb.dolala.core.common.service.vo.BankVo;
 import tw.com.fcb.dolala.core.config.IRConfig;
 
@@ -55,6 +53,8 @@ public class CommonController implements CommonApi {
     ChargeFeeCalculateService chargeFeeCalculateService;
     @Autowired
     RemitNatureService remitNatureService;
+    @Autowired
+    FpService fpService;
 
 
     // 匯率處理
@@ -271,6 +271,39 @@ public class CommonController implements CommonApi {
         remitNatureName = remitNatureService.getRemitNature(remitNatureCode, remitNatureType);
         log.info("呼叫匯款性質代碼API：輸入申報性質代碼" + remitNatureCode + " 匯款性質分類" + remitNatureType + " 取得申報性質名稱=" + remitNatureName);
         return remitNatureName;
+    }
+
+    public Response<FpmDto> getByFpmCurrency(String account, String crcy) {
+        FpmDto fpmDto = new FpmDto();
+        FpmVo fpmVo = new FpmVo();
+        Response<FpmDto> response = new Response<FpmDto>();
+        try {
+            fpmVo = fpService.getByFpmCurrency(account, crcy);
+            BeanUtils.copyProperties(fpmVo, fpmDto);
+            log.info("呼叫Fpm API：查詢 " + account + crcy);
+            response.setData(fpmDto);
+            response.Success();
+        } catch (Exception e) {
+            log.info(String.valueOf(e));
+            response.Error(e.getMessage(), getErrorMessage(e.getMessage()));
+        }
+
+        return response;
+    }
+
+    public Response<Integer> updateFpmBalance(String account, String crcy, BigDecimal amt) {FpmDto fpmDto = new FpmDto();
+        Response<Integer> response = new Response<Integer>();
+        try {
+            Integer result = fpService.updateFpmBalance(account, crcy, amt);
+            log.info("呼叫Fp 入帳API：輸入" + account + "+" + crcy + "+" + amt);
+            response.setData(result);
+            response.Success();
+        } catch (Exception e) {
+            log.info(String.valueOf(e));
+            response.Error(e.getMessage(), getErrorMessage(e.getMessage()));
+        }
+
+        return response;
     }
 
 }
