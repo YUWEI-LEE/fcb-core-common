@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -106,7 +107,7 @@ public interface CommonApi {
     public String isGetRemitNature(@PathVariable String remitNatureCode, @PathVariable String remitNatureType);
 
     // 讀取Fpm
-    @GetMapping("/fp/get-fpm/{account}/{crcy}")
+    @PutMapping("/fp/get-fpm/{account}/{crcy}")
     @Operation(description = "依account, crcy取得Fpm", summary = "讀取Fpm")
     public Response<FpmDto> getByFpmCurrency(@PathVariable("account") String account, @PathVariable("crcy") String crcy);
 
