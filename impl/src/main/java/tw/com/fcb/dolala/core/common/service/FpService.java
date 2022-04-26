@@ -1,5 +1,6 @@
 package tw.com.fcb.dolala.core.common.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Transactional
 @Service
+@Slf4j
 public class FpService {
 
     @Autowired
@@ -45,6 +47,7 @@ public class FpService {
                 BigDecimal bal = idx.getFpmBalance().add(amt);
                 fpm.setFpmBalance(bal);
                 fpmRepository.save(fpm);
+                log.info("外存入帳updateFpmBalance成功"+ fpm.getFpmBalance());
             }
         }
         return 0;

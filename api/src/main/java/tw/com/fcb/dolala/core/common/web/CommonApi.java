@@ -111,7 +111,7 @@ public interface CommonApi {
     public Response<FpmDto> getByFpmCurrency(@PathVariable("account") String account, @PathVariable("crcy") String crcy);
 
     // 入帳
-    @GetMapping("/fp/update-balance/{account}/{crcy}/{amt}")
+    @PutMapping("/fp/update-balance/{account}/{crcy}/{amt}")
     @Operation(description = "依account, crcy, amt外存入帳", summary = "外存入帳")
     public Response<Integer> updateFpmBalance(@PathVariable("account") String account,@PathVariable("crcy") String crcy,@PathVariable("amt") BigDecimal amt);
 }
