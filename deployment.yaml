@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  #名稱不可重覆
+  name: common
+spec:
+  replicas: 1
+  # ReplicaSet 的設定套用在帶有 app: nginx 的 Pod 上
+  selector:
+    matchLabels:
+      app: common
+   # .spec.template 是在定義 Pod 的 label
+  template:
+    metadata:
+      labels:
+        app: common
+    spec:
+      containers:
+      - name: common
+        # image: softleader/nginx-training:1.14.2
+        image: common-impl-0.0.1-SNAPSHOT
