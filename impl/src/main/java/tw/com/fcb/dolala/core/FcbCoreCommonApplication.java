@@ -17,42 +17,42 @@ import tw.com.fcb.dolala.core.mq.Receiver;
 @EnableFeignClients
 public class FcbCoreCommonApplication {
 
-    public static final String topic = "fcb-dolala-news";
-    public static final String queue = "fcb-dolala";
+//    public static final String topic = "fcb-dolala-news";
+//    public static final String queue = "fcb-dolala";
 
     public static void main(String[] args) {
         SpringApplication.run(FcbCoreCommonApplication.class, args);
     }
 
-    @Bean
-    Queue queue() {
-        return new Queue(queue, false);
-    }
-
-    @Bean
-    TopicExchange exchange() {
-        return new TopicExchange(topic);
-    }
-
-    @Bean
-    Binding binding(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with("fcb.dolala.#");
-    }
-
-    @Bean
-    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
-                                             MessageListenerAdapter listenerAdapter) {
-
-        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
-        container.setConnectionFactory(connectionFactory);
-        container.setQueueNames(queue);
-        container.setMessageListener(listenerAdapter);
-
-        return container;
-    }
-
-    @Bean
-    MessageListenerAdapter listenerAdapter(Receiver receiver) {
-        return new MessageListenerAdapter(receiver, "receiveMessage");
-    }
+//    @Bean
+//    Queue queue() {
+//        return new Queue(queue, false);
+//    }
+//
+//    @Bean
+//    TopicExchange exchange() {
+//        return new TopicExchange(topic);
+//    }
+//
+//    @Bean
+//    Binding binding(Queue queue, TopicExchange exchange) {
+//        return BindingBuilder.bind(queue).to(exchange).with("fcb.dolala.#");
+//    }
+//
+//    @Bean
+//    SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,
+//                                             MessageListenerAdapter listenerAdapter) {
+//
+//        SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+//        container.setConnectionFactory(connectionFactory);
+//        container.setQueueNames(queue);
+//        container.setMessageListener(listenerAdapter);
+//
+//        return container;
+//    }
+//
+//    @Bean
+//    MessageListenerAdapter listenerAdapter(Receiver receiver) {
+//        return new MessageListenerAdapter(receiver, "receiveMessage");
+//    }
 }

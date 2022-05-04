@@ -19,6 +19,9 @@ import tw.com.fcb.dolala.core.common.service.ExchgRateService;
 import tw.com.fcb.dolala.core.common.service.IDNumberCheckService;
 import tw.com.fcb.dolala.core.common.service.vo.BankVo;
 import tw.com.fcb.dolala.core.config.IRConfig;
+import tw.com.fcb.dolala.core.mq.Runner;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * @author sinjen
@@ -30,7 +33,6 @@ public class CommonController implements CommonApi {
 
     @Autowired
     IRConfig irConfig;
-
     @Autowired
     ExchgRateService fxService;
     @Autowired
@@ -59,7 +61,9 @@ public class CommonController implements CommonApi {
 
     // 匯率處理
     @Override
-    public BigDecimal isGetFxRate(@PathVariable("exchg-rate-type") String exchgRateType, @PathVariable("currency") String currency, @PathVariable("standard-currency") String standardCurrency) {
+    public BigDecimal isGetFxRate(@PathVariable("exchg-rate-type") String exchgRateType,
+                                  @PathVariable("currency") String currency,
+                                  @PathVariable("standard-currency") String standardCurrency) {
         log.info("${env-type} = {}", irConfig.getEnvType());
         BigDecimal exchangeRate = fxService.getRate(exchgRateType, currency, standardCurrency);
         log.info("呼叫讀取匯率API：取得ExchgRate = " + exchangeRate);
@@ -144,7 +148,7 @@ public class CommonController implements CommonApi {
 
 
     //顧客資料處理
-    public Response<CustomerDto> getCustomer(@PathVariable("accountNumber") String accountNumber) {
+    public Response<CustomerDto> getCustomer(@NotNull @PathVariable("accountNumber") String accountNumber) {
         log.info("接收accountNumber = " + accountNumber);
         CustomerDto customerDto = null;
         Response<CustomerDto> response = new Response<CustomerDto>();
@@ -164,7 +168,7 @@ public class CommonController implements CommonApi {
 
     }
 
-    public Response<CustomerDto> getCustomerId(@PathVariable("customerId") String customerId) {
+    public Response<CustomerDto> getCustomerId(@NotNull @PathVariable("customerId") String customerId) {
         log.info("接收accountId = " + customerId);
         CustomerDto customerDto = null;
         Response<CustomerDto> response = new Response<CustomerDto>();
@@ -182,7 +186,7 @@ public class CommonController implements CommonApi {
     }
 
     // 分行資料處理
-    public String getBranchCode(@PathVariable("branch") String branch) {
+    public String getBranchCode(@NotNull @PathVariable("branch") String branch) {
         String branchCode = null;
         try {
             branchCode = branchCheckService.getBranchCode(branch);
@@ -194,7 +198,7 @@ public class CommonController implements CommonApi {
     }
 
     // 讀銀行檔
-    public BankDto getBank(@PathVariable("swiftCode") String swiftCode) {
+    public BankDto getBank(@NotNull @PathVariable("swiftCode") String swiftCode) {
         BankDto bankDto = new BankDto();
         BankVo bankVo = new BankVo();
         try {
@@ -208,7 +212,7 @@ public class CommonController implements CommonApi {
     }
 
     // TCTYR02 以匯款行/付款行國家代號查詢名稱
-    public String getCountryName(@PathVariable("countrycode") String countryCode) {
+    public String getCountryName(@NotNull @PathVariable("countrycode") String countryCode) {
 
         log.info("呼叫讀取國家名稱API：查詢 " + countryCode);
 
@@ -305,5 +309,6 @@ public class CommonController implements CommonApi {
 
         return response;
     }
+
 
 }

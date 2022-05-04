@@ -30,14 +30,14 @@ public class Runner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("==== sending a message to MQ====");
-        rabbitTemplate.convertAndSend(FcbCoreCommonApplication.topic, "fcb.dolala.sample", "sending message from dolala");
-        receiver.getLatch().await(1000, TimeUnit.SECONDS);
+//        System.out.println("==== sending a message to MQ====");
+//        rabbitTemplate.convertAndSend(FcbCoreCommonApplication.topic, "fcb.dolala.sample", "sending message from dolala");
+//        receiver.getLatch().await(1000, TimeUnit.SECONDS);
     }
 
     public void sendMessage(String mqMessage) throws Exception {
-        rabbitTemplate.convertAndSend(FcbCoreCommonApplication.topic, "fcb.dolala.sample", "sending message from dolala");
-        log.debug("sendMessage" + mqMessage);
+//        rabbitTemplate.convertAndSend(FcbCoreCommonApplication.topic, "fcb.dolala.sample", "sending message from dolala");
+//        log.debug("sendMessage" + mqMessage);
 
     }
 }

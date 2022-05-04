@@ -25,7 +25,7 @@ public class MqController implements MqApi {
     public void qryCdcQuotaCheck() throws Exception {
 
         log.info("呼叫讀取央行額度查詢API");
-        runner.sendMessage("send to mq CDC_Quota_Check)");
+//        runner.sendMessage("send to mq CDC_Quota_Check)");
         log.info("傳送MQ資料 CDC_Quota_Check:");
     }
 
@@ -34,7 +34,7 @@ public class MqController implements MqApi {
     public void checkCdcMedia() throws Exception {
 
         log.info("呼叫檢核央行媒體申報資料API");
-        runner.sendMessage("send to mq CDC_Media)");
+//        runner.sendMessage("send to mq CDC_Media)");
         log.info("傳送MQ資料 CDC_Media:");
     }
 
@@ -43,7 +43,7 @@ public class MqController implements MqApi {
     public void checkPosition() throws Exception {
 
         log.info("呼叫檢核部位資料API");
-        runner.sendMessage("send to mq Position)");
+//        runner.sendMessage("send to mq Position)");
         log.info("傳送MQ資料 Position:");
     }
 
@@ -52,7 +52,7 @@ public class MqController implements MqApi {
     public void callInterbankExchanges() throws Exception {
 
         log.info("呼叫處理聯行往來API");
-        runner.sendMessage("send to mq InterbankExchanges)");
+//        runner.sendMessage("send to mq InterbankExchanges)");
         log.info("傳送MQ資料 InterbankExchanges:");
     }
 
@@ -61,7 +61,7 @@ public class MqController implements MqApi {
     public void callSwiftGpi() throws Exception {
 
         log.info("呼叫處理SWIFT GPI狀態API");
-        runner.sendMessage("send to mq SWIFT_GPI)");
+//        runner.sendMessage("send to mq SWIFT_GPI)");
         log.info("傳送MQ資料 SWIFT_GPI  :");
 
     }
